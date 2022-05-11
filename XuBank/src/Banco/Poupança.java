@@ -1,3 +1,4 @@
+package Banco;
 public class Poupança extends Conta implements CLC_Rendimento {
 
     private static final double REDIMENTO = 0.006;
