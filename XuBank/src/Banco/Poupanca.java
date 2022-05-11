@@ -1,12 +1,12 @@
 package Banco;
-public class Poupança extends Conta implements CLC_Rendimento {
+public class Poupanca extends Conta implements CLC_Rendimento {
 
     private static final double REDIMENTO = 0.006;
     private boolean temRedimento;
 
 
-    public Poupança() {
-        super("Poupança");
+    public Poupanca() {
+        super("Poupanca");
         this.temRedimento = true;
     }
 
