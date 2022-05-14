@@ -1,24 +1,42 @@
 package Banco;
 public class Conta {
 
-    protected double saldo;
+    private double saldo;
     private String tipo;
 
     public Conta(String tipo) {
-        this.saldo = 0.0;
+        this.setSaldo(0.0);
         this.tipo = tipo;
     }
 
-    public double saque(double valor) {
-        return saldo - valor;
+    public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public double saque(double valor) {
+        return getSaldo() - valor;
     }
 
     public double deposito(double valor) {
-        return saldo + valor;
+        return getSaldo() + valor;
     }
 
+    @Override
     public String toString() {
-        return "Saldo: " + saldo +
+        return "Saldo: " + getSaldo() +
                 "Tipo Conta" + tipo;
     }
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
 }
+

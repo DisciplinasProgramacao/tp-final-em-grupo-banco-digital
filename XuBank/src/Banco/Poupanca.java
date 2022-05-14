@@ -13,6 +13,6 @@ public class Poupanca extends Conta implements CLC_Rendimento {
 
     @Override
     public double calRendimento() {
-        return super.saldo * REDIMENTO;
+        return super.getSaldo() * REDIMENTO;
     }
 }

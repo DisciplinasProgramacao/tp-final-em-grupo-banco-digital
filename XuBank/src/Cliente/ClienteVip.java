@@ -15,8 +15,8 @@ public class ClienteVip extends Cliente{
 	
 	RendaFixa conta = new RendaFixa(); // Remover quanto as constas tiverem sido implementadas
 
-	public ClienteVip(String nome, String cpf, String senha, Conta Conta) {
-		super(nome, cpf, senha, Conta);
+	public ClienteVip(String nome, String cpf, String senha) {
+		super(nome, cpf, senha);
 		calPts();
 	}
 	
@@ -42,11 +42,11 @@ public class ClienteVip extends Cliente{
 		return 0;
 	}
 	
-//	@Override
-//	public int calPts() {
-//		this.totalPonto += (this.conta.getSaldo() / 1000 ) + PONTOS_MES;
-//		return 0;
-//	}
+	@Override
+	public int calPts() {
+		this.totalPonto += (this.conta.getSaldo() / 1000 ) + PONTOS_MES;
+		return 0;
+	}
 	
 	@Override
 	public int verificarBeneficios() {

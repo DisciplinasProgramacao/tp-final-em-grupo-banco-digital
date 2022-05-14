@@ -10,8 +10,8 @@ public class Investimento extends Conta implements CLC_Imposto {
     private static final int PTS_BONUS = 1200;
 
 
-    public Investimento(String tipo) {
-        super(tipo);
+    public Investimento() {
+        super("Investimento");
     }
 
     @Override

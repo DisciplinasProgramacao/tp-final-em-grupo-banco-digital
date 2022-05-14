@@ -15,21 +15,19 @@ public class RendaFixa extends Conta implements CLC_Imposto {
     }
 
 
-
+    public static double descSaque(){
+        return (IMPOSTO * DESC_FIDELIDADE) * 100;
+    }
+    
+    @Override
     public double saque(double valorsaque) {
-        return saldo - (valorsaque + calcImposto(valorsaque));
+        return getSaldo() - (valorsaque + calcImposto(valorsaque));
     }
 
     @Override
     public double calcImposto(double valorSaque) {
         return (valorSaque * descSaque()) / 100;
     }
-
-
-    public static double descSaque(){
-        return (IMPOSTO * DESC_FIDELIDADE) * 100;
-    }
-
 
     @Override
     public double calRendimento() {

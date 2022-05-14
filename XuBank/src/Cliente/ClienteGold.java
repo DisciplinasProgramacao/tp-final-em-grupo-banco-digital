@@ -10,14 +10,12 @@ public class ClienteGold extends Cliente {
 	private static final double SAQUE_ESPECIAL = 300;
 
 	private int totalPonto;
-	private double ConsumoMensal;
+	private double ConsumoMensal; //Que isso msm kk?
+	
 
-	RendaFixa conta = new RendaFixa(); // Remover quanto as constas tiverem sido implementadas
-
-	public ClienteGold(String nome, String cpf, String senha, Conta Conta) {
-		super(nome, cpf, senha, Conta);		
-		calPts(); // Passar as contas por parametros? obs, talvez criar um metodo que adiciona uma conta ha um cliente
-
+	public ClienteGold(String nome, String cpf, String senha) {
+		super(nome, cpf, senha);		
+		calPts();
 	}
 	
 	public String toString() {
@@ -28,30 +26,24 @@ public class ClienteGold extends Cliente {
 		linha.append("Categoria: Gold\n");
 		linha.append("Pontos de fidelidade: " + this.totalPonto + "\n");
 		linha.append("Contas do cliente: \n");
-//		listaConta.forEach(conta -> linha.append(conta + "\n"));
+		listaConta.forEach(conta -> linha.append("  "+conta + "\n"));
+		linha.append("Beneficios disponiveis do cliente: "+ this.verificarBeneficios()+"\n");
 		return linha.toString();
 	}
 
 	@Override
-	public double calTarifa() {
-		return this.TAXA_MENSAL;
+	public int calPts() {
+		double somaValores =0;
+		for(int i =0; i< super.listaConta.size(); i++) {			
+			somaValores += super.listaConta.get(i).getSaldo();
+		}
+		this.totalPonto = (int) (( somaValores/ 1000 ) + PONTOS_MES);
+		return this.totalPonto;
 	}
 
-//	@Override
-//	public double calBonus() {
-//		conta.setSaldo(conta.getSaldo() - SAQUE_ESPECIAL); 
-//		return conta.getSaldo();
-//	}
-
-//	@Override
-//	public int calPts() {
-//		this.totalPonto += (this.conta.getSaldo() / 1000 ) + PONTOS_MES;
-//		return 0;
-//	}
-
 	@Override
-	public int verificarBeneficios() {
-		return (int) SAQUE_ESPECIAL;
+	public boolean verificarBeneficios() {
+		return true;
 	}
 
 
