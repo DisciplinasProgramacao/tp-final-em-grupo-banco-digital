@@ -12,15 +12,22 @@ public class Cliente {
 	protected String nome;
 	protected String cpf;
 	protected String senha;
-	protected List<Conta> listaConta;
-	
+	protected List<Conta> listaConta = new LinkedList<>();
+
 	public Cliente(String nome, String cpf, String senha) {
 			this.nome = nome;
 			this.cpf = cpf;
 			this.senha = senha;
-			listaConta = new LinkedList<>();
 	}
 
+	public List<Conta> getListaConta() {
+		return listaConta;
+	}
+	
+	public String getCpf() {
+		return cpf;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder linha = new StringBuilder();
@@ -29,7 +36,7 @@ public class Cliente {
 		linha.append("CPF: " + cpf + "\n");
 		linha.append("Categoria: Regular\n");
 		linha.append("Contas do cliente: \n");
-		listaConta.forEach(conta -> linha.append(conta + "\n"));
+		this.listaConta.forEach(conta -> linha.append(conta + "\n"));
 		return linha.toString();
 	}
 
@@ -57,7 +64,11 @@ public class Cliente {
 		conta.setSaldo(conta.getSaldo() - TAXA_MENSAL); 
 	}	
 	
-	
+	@Override
+	public boolean equals(Object arg0) {
+		// TODO Auto-generated method stub
+		return super.equals(arg0);
+	}
 	//------------------------------------------------------------------------------------------
 	/**
 	 * Vincula uma conta a um cliente

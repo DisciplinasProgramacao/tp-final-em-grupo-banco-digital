@@ -12,7 +12,7 @@ public class Aplicacao {
 	private static final float SETECENTOS = 700;
 	private static final float TRES_MIL = 3000;
 
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
 
 		Conta conta = new RendaFixa();
 		Conta conta1 = new Poupanca();

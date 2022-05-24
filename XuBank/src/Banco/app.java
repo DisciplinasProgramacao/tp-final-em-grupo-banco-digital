@@ -1,6 +1,6 @@
 package Banco;
 public class app {
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
 
 
         System.out.println(RendaFixa.descSaque());
