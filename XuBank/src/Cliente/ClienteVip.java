@@ -22,7 +22,6 @@ public class ClienteVip extends Cliente{
 	
 	public String toString() {
 		StringBuilder linha = new StringBuilder();
-		linha.append("--- Dados do Cliente ----\n");
 		linha.append("Nome: " + nome + "\n");
 		linha.append("CPF: " + cpf + "\n");
 		linha.append("Categoria: Vip\n");

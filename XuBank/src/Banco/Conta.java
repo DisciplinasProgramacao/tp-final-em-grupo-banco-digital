@@ -21,18 +21,18 @@ public class Conta {
 		this.tipo = tipo;
 	}
 
-	public double saque(double valor) {
-        return getSaldo() - valor;
+	public void saque(double valor) {
+        this.saldo -= valor;
     }
 
-    public double deposito(double valor) {
-        return getSaldo() + valor;
+    public void deposito(double valor) {
+        this.saldo += valor;
     }
 
     @Override
     public String toString() {
         return "Numero da conta: " + this.id_conta +
-                "\nTipo Conta: " + this.tipo;
+                "\nTipo Conta: " + this.tipo + "\nSaldo: "+this.saldo;
     }
 
 	public double getSaldo() {

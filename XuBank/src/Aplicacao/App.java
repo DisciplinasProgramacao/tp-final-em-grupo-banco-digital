@@ -9,7 +9,8 @@ import Cliente.*;
 public class App {
 
 	public static Banco banco = new Banco();
-	static Scanner teclado = new Scanner(System.in);
+	public static Cliente cliente = new Cliente();
+	
 
 	static void pausa(Scanner teclado) {
 		System.out.println("Enter para continuar.");
@@ -21,8 +22,8 @@ public class App {
 		System.out.println("==========================");
 		System.out.println("1 - Gerente");
 		System.out.println("2 - Cliente");
-		System.out.println("4 - Gerar relatorio");
-		System.out.println("3 - Finalizar");
+		System.out.println("3 - Gerar relatorio");
+		System.out.println("4 - Finalizar");
 
 		int opcao = teclado.nextInt();
 		teclado.nextLine();
@@ -30,7 +31,7 @@ public class App {
 	}
 
 	private static void cadastroCliente() {
-		
+		Scanner teclado = new Scanner(System.in);
 
 		System.out.println("Nome do cliente: ");
 		String nome = teclado.nextLine();
@@ -57,6 +58,7 @@ public class App {
 		} catch (NullPointerException e) {
 			System.out.println("Problema ao cadastrar cliente!");
 		}
+		
 
 	}
 
@@ -65,6 +67,7 @@ public class App {
 	}
 
 	private static void criarConta() {
+		Scanner teclado = new Scanner(System.in);
 		System.out.println("Tipo de conta: \n 1- Corrente \n 2- Poupanca \n 3- Renda Fixa\n 4- Investimento");
 		int tipoConta = teclado.nextInt();
 		switch (tipoConta) {
@@ -91,7 +94,7 @@ public class App {
 	}
 
 	private static void vincularCliente() {
-		
+		Scanner teclado = new Scanner(System.in);
 		System.out.println("--- Vinculacao de conta ---");
 		System.out.println("CPF do cliente: ");
 		String CPF = teclado.nextLine();
@@ -101,9 +104,9 @@ public class App {
 		for (Cliente cliente : banco.getListaCliente()) {
 			if (cliente.getCpf().equals(CPF)) {
 				cliente.getListaConta().add(banco.getListaContas().get(numeroConta));
+				System.out.println("\n\nCliente vinculado!");
 			}
 		}
-
 	}
 
 	public static int menuGerente(Scanner teclado) {
@@ -145,28 +148,29 @@ public class App {
 
 	private static void sitemaCliente() {
 		Scanner teclado = new Scanner(System.in);
-//		Cliente cliente = identificaCliente();;
 		int opcao;
 		double valor = 0.00;
-		
+		cliente = identificaCliente();
 		do {
 			opcao = menuCliente(teclado);
 			switch (opcao) {
 
 			case 1:
-				identificaCliente().getListaConta().forEach(conta -> System.out.println("\n-----------------\nConta: " + conta.getTipo() + "\nSaldo da Conta: "+conta.getSaldo()));
+				cliente.getListaConta().forEach(conta -> System.out.println(conta));
 				break;
 			case 2:
 				System.out.println("\nValor do saque:");
 				valor = teclado.nextDouble();
-				System.out.println("\nDigite o numero da conta uqe deseja realizar o saque: ");
-				identificaCliente().getListaConta().get(teclado.nextInt()).saque(valor);
+				System.out.println("\nDigite o numero da conta que deseja realizar o saque: ");
+				int numeroDaConta = teclado.nextInt();
+				cliente.getListaConta().get(numeroDaConta).saque(valor);
 				break;
 			case 3:
 				System.out.println("\nValor do deposito:");
 				valor = teclado.nextDouble();
-				System.out.println("\nDigite o numero da conta uqe deseja realizar o saque: ");
-				identificaCliente().getListaConta().get(teclado.nextInt()).saque(valor);
+				System.out.println("\nDigite o numero da conta uqe deseja realizar o deposito: ");
+				numeroDaConta = teclado.nextInt();
+				cliente.getListaConta().get(numeroDaConta).deposito(valor);
 				break;
 			case 4:
 				System.out.println("Informe de redimentos nao disponivel no momento! :( ");
@@ -194,6 +198,7 @@ public class App {
 	}
 	
 	private static Cliente identificaCliente() {
+		Scanner teclado = new Scanner(System.in);
 		System.out.println("Digite seu cpf: ");
 		String cpf = teclado.nextLine();
 		

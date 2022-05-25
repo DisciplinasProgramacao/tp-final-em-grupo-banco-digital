@@ -19,6 +19,11 @@ public class Cliente {
 			this.cpf = cpf;
 			this.senha = senha;
 	}
+	public Cliente() {
+		this.nome = "N/A";
+		this.cpf = null;
+		this.senha = null;
+}
 
 	public List<Conta> getListaConta() {
 		return listaConta;
@@ -31,7 +36,6 @@ public class Cliente {
 	@Override
 	public String toString() {
 		StringBuilder linha = new StringBuilder();
-		linha.append("--- Dados do Cliente ----\n");
 		linha.append("Nome: " + nome + "\n");
 		linha.append("CPF: " + cpf + "\n");
 		linha.append("Categoria: Regular\n");
