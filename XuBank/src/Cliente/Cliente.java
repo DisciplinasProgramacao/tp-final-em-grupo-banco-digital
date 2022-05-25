@@ -52,6 +52,12 @@ public class Cliente {
 		return 0;
 	}
 	
+	public String getNome() {
+		return nome;
+	}
+	public String getSenha() {
+		return senha;
+	}
 	/**
 	 *Verifica se o cliente tem algum benefício.
 	 * @return Valor dos beneficios que o cliente tem direito
@@ -70,7 +76,6 @@ public class Cliente {
 	
 	@Override
 	public boolean equals(Object arg0) {
-		// TODO Auto-generated method stub
 		return super.equals(arg0);
 	}
 	//------------------------------------------------------------------------------------------

@@ -3,14 +3,12 @@ package Aplicacao;
 import java.util.Scanner;
 
 import Banco.*;
-import Banco.Investimento;
 import Cliente.*;
 
 public class App {
 
 	public static Banco banco = new Banco();
 	public static Cliente cliente = new Cliente();
-	
 
 	static void pausa(Scanner teclado) {
 		System.out.println("Enter para continuar.");
@@ -23,7 +21,8 @@ public class App {
 		System.out.println("1 - Gerente");
 		System.out.println("2 - Cliente");
 		System.out.println("3 - Gerar relatorio");
-		System.out.println("4 - Finalizar");
+		System.out.println("4 - Informacoes para direcao");
+		System.out.println("5 - Finalizar");
 
 		int opcao = teclado.nextInt();
 		teclado.nextLine();
@@ -58,7 +57,6 @@ public class App {
 		} catch (NullPointerException e) {
 			System.out.println("Problema ao cadastrar cliente!");
 		}
-		
 
 	}
 
@@ -226,15 +224,21 @@ public class App {
 				sitemaCliente();
 				break;
 			case 3:
-				System.out.println(banco);
+				banco.gravaDadosEmArquivo();
+				System.out.println(banco);				
 				break;
 			case 4:
+				System.out.println("\nValor capital do banco: "+banco.valorDeCapitalDoBanco());
+				System.out.println("\nQuantodade de Clietes: "+Banco.quantidadeDeClientes());
+				break;
+			case 5:
 				opcao = 0;
 				break;
 			}
+			
 			pausa(teclado);
 		} while (opcao != 0);
 		teclado.close();
 	}
-
+	
 }
