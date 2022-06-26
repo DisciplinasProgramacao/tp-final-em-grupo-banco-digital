@@ -13,7 +13,7 @@ public class Investimento extends Conta implements CALC_Imposto, Serializable {
     private static final double RENDIMENTO_MAX = 0.015;
     private static final double DESC_FIDELIDADE = 0.5;
     private static final double BOUNS_REND = 0.1;
-    private static int totalPTS;
+    private int totalPTS;
 
 
     public Investimento() {
@@ -24,18 +24,46 @@ public class Investimento extends Conta implements CALC_Imposto, Serializable {
 
 
     @Override
-    public double saque(double valor) {
-            this.saldo = this.saldo - (valor + calcImposto(valor));;
-            listOpecao.add(new Opercao("saque", (valor + calcImposto(valor))));
+    public double saque(Cliente cliente, double valor) {
+        calRendimento();
+        if(valor > this.saldo){
+            if(cliente.getCategoria().temSaqueEspecial() == 0){
+                System.out.println("Saldo insuficiente");
+                System.out.println("SALDO: " + this.saldo);
+                return this.saldo;
+            } else{
+                this.saldo = limiteCheque(cliente,valor);
+                listOpecao.add(new Opercao(EnumOperacao.SAQUE, (valor + calcImposto())));
+                return this.saldo;
+            }
+        }else{
+            this.saldo = this.saldo - (valor + calcImposto());;
+            listOpecao.add(new Opercao(EnumOperacao.SAQUE, (valor + calcImposto())));
             return this.saldo;
+        }
     }
 
+
+    public double limiteCheque(Cliente cliente, double valor){
+        double limite = -valor + (this.saldo);
+        if(-cliente.getCategoria().temSaqueEspecial() <= limite ){
+            this.saldo = this.saldo - (valor + calcImposto());
+            listOpecao.add(new Opercao(EnumOperacao.SAQUE, (valor + calcImposto())));
+            return this.saldo;
+        }else{
+            System.out.println("Limite de cheque especial excedido");
+            return this.saldo;
+        }
+    }
+
+
+
     @Override
-    public double calcImposto(double valorSaque) {
+    public double calcImposto() {
         if (temDescontoImposto() == true) {
-            return (valorSaque * IMPOSTO) * DESC_FIDELIDADE;
+            return (calRendimento() * IMPOSTO) * DESC_FIDELIDADE;
         } else {
-            return valorSaque * IMPOSTO;
+            return calRendimento() * IMPOSTO;
         }
     }
 

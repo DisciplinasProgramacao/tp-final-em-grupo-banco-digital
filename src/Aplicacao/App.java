@@ -86,7 +86,7 @@ public class App {
                     Cliente cliente = xuBank.buscarCliente(cpf);
                     System.out.println(cliente);
                     Conta conta = criarConta();
-                    if (cliente.verificarCheque() && conta.getDescricao().equals("INVESTIMENTO")) {
+                    if (cliente.getCategoria().temSaqueEspecial() == 0 && conta.getDescricao().equals("INVESTIMENTO")) {
                         System.out.println("CLIENTE REGULAR NÃO PODE TER CONTA INVESTIMENTO.");
                         pesquisarCliente();
                     } else {
@@ -302,23 +302,11 @@ public class App {
                 case 3:
                     System.out.println("INFORME O VALOR DO SAQUE: ");
                     double saque = sc.nextDouble();
-                    if(saque > cliente.buscarConta(numConta).getSaldo()){
-                        if(cliente.verificarCheque()){
-                            System.out.println("SALDO INSUFICIENTE");
-                            menu();
-                        }else{
-                            cliente.limiteDisponivel(numConta);
-                            cliente.buscarConta(numConta).saque(saque);
-                            System.out.println("OPERAÇÃO REALIZADA COM SUCESSO");
-                            xubank.salvarDados();
-                            menu();
-                        }
-                    }else{
-                    cliente.buscarConta(numConta).saque(saque);
+                    cliente.buscarConta(numConta).saque(cliente,saque);
                     System.out.println("OPERAÇÃO REALIZADA COM SUCESSO");
                     xubank.salvarDados();
                     menu();
-                    }break;
+                    break;
                 case 4:
                     System.out.println(cliente.buscarConta(numConta).toString());
                     xubank.salvarDados();

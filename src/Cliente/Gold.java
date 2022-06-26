@@ -15,14 +15,18 @@ public class Gold implements IEspecial, Serializable {
     private  String tipoCliente;
     private int totalPontos;
 
+
     public Gold() {
         this.totalPontos = 0;
         this.tipoCliente = "GOLD";
     }
 
+    public int getTotalPontos() {
+        return totalPontos;
+    }
 
     @Override
-    public int temSaqueEspecial() {
+    public  int temSaqueEspecial() {
         return LIMITE_ESPECIAL;
     }
 

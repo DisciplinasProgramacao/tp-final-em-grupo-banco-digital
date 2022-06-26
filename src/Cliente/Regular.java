@@ -14,7 +14,7 @@ public class Regular implements IEspecial, Serializable {
 
 
     @Override
-    public int temSaqueEspecial() {
+    public  int temSaqueEspecial() {
         return 0;
     }
 

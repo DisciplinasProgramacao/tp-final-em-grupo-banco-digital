@@ -1,5 +1,7 @@
 package Banco;
 
+import Cliente.Cliente;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Random;
@@ -10,8 +12,8 @@ public class Conta implements Serializable {
     protected int numConta;
     private String descricao;
     protected LinkedList<Opercao> listOpecao;
-    private Random random = new Random();
 
+    private Random random = new Random();
 
     public Conta() {
         this.saldo = 0;
@@ -31,7 +33,7 @@ public class Conta implements Serializable {
     }
 
 
-    public  double getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
@@ -43,16 +45,28 @@ public class Conta implements Serializable {
         return descricao;
     }
 
-    public double saque(double valor) {
+    public double saque(Cliente cliente, double valor) {
+        if (valor > this.saldo) {
+            if (cliente.getCategoria().temSaqueEspecial() == 0) {
+                System.out.println("Saldo insuficiente");
+                System.out.println("SALDO: " + this.saldo);
+                return this.saldo;
+            } else {
+                this.saldo = this.saldo - valor;
+                listOpecao.add(new Opercao(EnumOperacao.SAQUE, valor));
+                return this.saldo;
+            }
+        } else {
             this.saldo = this.saldo - valor;
-            listOpecao.add(new Opercao("saque", valor));
+            listOpecao.add(new Opercao(EnumOperacao.SAQUE, valor));
             return this.saldo;
+        }
     }
 
 
     public double deposito(double valor) {
         this.saldo = this.saldo + valor;
-        listOpecao.add(new Opercao("deposito", valor));
+        listOpecao.add(new Opercao(EnumOperacao.DEPOSITO, valor));
         return this.saldo;
     }
 

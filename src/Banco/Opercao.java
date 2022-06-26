@@ -5,12 +5,12 @@ import java.time.LocalDate;
 
 public class Opercao implements Serializable {
     private LocalDate data;
-    private String tipoOperacao;
+    private EnumOperacao tipoOperacao;
     private double valor;
 
 
 
-    public Opercao(String tipoOperacao, double valor) {
+    public Opercao(EnumOperacao tipoOperacao, double valor) {
         this.tipoOperacao = tipoOperacao;
         this.valor = valor;
         this.data = LocalDate.now();

@@ -72,22 +72,6 @@ public class Cliente implements Serializable {
     }
 
 
-    public boolean verificarCheque(){
-        if (this.categoria.temSaqueEspecial() == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    public boolean limiteDisponivel(int nunconta) throws Validation {
-        if(buscarConta(nunconta).getSaldo() == categoria.temSaqueEspecial()){
-            throw new Validation("LIMITE DE CHEQUE ESPECIAL EXCEDIDO");
-        }else{
-            return false;
-        }
-    }
 
 
     @Override
